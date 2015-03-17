@@ -22,25 +22,52 @@ public class PalindromeTester
          System.out.println ("Enter a potential palindrome:");
          str = s.nextLine();
 
-         left = 0;
-         right = str.length() - 1;
-
-         while (str.charAt(left) == str.charAt(right) && left < right)
-         {
-            left++;
-            right--;
-         }
-
+         
          System.out.println();
 
-         if (left < right)
-            System.out.println ("That string is NOT a palindrome.");
+         if (isRecursivePalindrome(str))
+            {System.out.println ("That string IS a palindrome.");}
          else
-            System.out.println ("That string IS a palindrome.");
+            {System.out.println ("That string is NOT a palindrome.");}
 
          System.out.println();
          System.out.print ("Test another palindrome (y/n)? ");
          another = s.nextLine();
       }
    }
+   
+   private static boolean isPalindrome(String str)
+   {
+       int left = 0;
+       int right = str.length() - 1;
+
+       while (str.charAt(left) == str.charAt(right) && left < right)
+       {
+         left++;
+         right--;
+       }
+       
+       return (left >= right);
+   }
+   
+   private static boolean isRecursivePalindrome(String str)
+   {
+       if (str.length() <= 1)
+       {
+           return true;
+        }
+        
+       int first = 0;
+       int last = str.length() -1;
+       String rest = str.substring(1,last);
+       
+       if(str.charAt(first) == str.charAt(last) && isRecursivePalindrome(rest))
+       {
+           return true;
+       }
+       else
+       {
+            return false;
+       }
+    }
 }
