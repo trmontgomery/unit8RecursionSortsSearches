@@ -16,16 +16,16 @@ public class LogSpiralPanel extends JPanel
             the spiral.
       */
      
-      double height = getHeight();
+      double height = getHeight()-100;
       double width = height*GOLDEN_MEAN;
       
       Graphics2D g2 = (Graphics2D) g;
-      g2.setColor(Color.GREEN);
+      g2.setColor(Color.BLACK);
       
       Rectangle2D.Double goldie = new Rectangle2D.Double(50, 50, width, height);
       g2.draw(goldie);
       
-      recursiveDraw(g2, 50+width , 50+height , height, 0);
+      recursiveDraw(g2, 50 + (height*(GOLDEN_MEAN-1)), 50 , height, 0);
       
    }
    
@@ -50,22 +50,27 @@ public class LogSpiralPanel extends JPanel
       
       double newSide = side * (GOLDEN_MEAN-1);
       double newX, newY;
-      if (angle == 0 || angle == 90)
+      if (angle == 0)
       {
-          newX = x - side;
+          newX = x - newSide;
+          newY = y;
         }
-      else 
-      {
-          newX = x + side;
-        }
-       if (angle == 0 || angle == 270)
-      {
-          newY = y - side;
-        }
-      else 
+      else if (angle == 90)
       {
           newY = y + side;
+          newX = x;
         }
+      else if (angle == 180)
+      {
+          newX = x + side;
+          newY = y + (GOLDEN_MEAN-1)*newSide;
+        }
+      else 
+      {
+          newX = x + (GOLDEN_MEAN-1)*newSide;
+          newY = y - newSide;
+        }
+
       int newAngle = (angle + 90) % 360;
       
       recursiveDraw(g2, newX, newY, newSide, newAngle);
