@@ -11,14 +11,14 @@ import javax.swing.*;
 
 public class FractalTreeViewer implements ActionListener
 {
-    private final int WIDTH = 400;
-    private final int HEIGHT = 500;
+    private final int WIDTH = 600;
+    private final int HEIGHT = 600;
 
     private final int MIN = 1, MAX = 9;
 
     private JButton increase, decrease;
     private JLabel titleLabel, orderLabel;
-    private KochPanel drawing;
+    private FractalTreePanel drawing;
     private JPanel panel, tools;
     private JFrame frame;
 
@@ -59,7 +59,7 @@ public class FractalTreeViewer implements ActionListener
         tools.add (Box.createHorizontalStrut (20));
         tools.add (orderLabel);
 
-        drawing = new KochPanel (1);
+        drawing = new FractalTreePanel (1);
 
         panel = new JPanel();
         panel.add (tools);
